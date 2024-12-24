@@ -3,6 +3,7 @@ package com.nevesdev.controle_financeiro.model.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nevesdev.controle_financeiro.model.category.Category;
 import com.nevesdev.controle_financeiro.model.debit.Debit;
+import com.nevesdev.controle_financeiro.model.money.MoneyIn;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -50,6 +51,10 @@ public class User implements UserDetails {
     @OneToMany
     @JsonIgnore
     private List<Debit> debits = new ArrayList<>();
+
+    @OneToMany
+    @JsonIgnore
+    private List<MoneyIn> inflow = new ArrayList<>();
 
     @OneToMany
     @JsonIgnore

@@ -157,7 +157,7 @@ function setTables(data) {
   let debitsList = data.debitOuts;
   total.innerHTML += data.total.toFixed(2).replace(".", ",");
   debitsList.forEach((element) => {
-    let date = element.date.split("T")[0];
+    let date = element.dueDate.split("T")[0];
     date =
       date.split("-")[2] + "/" + date.split("-")[1] + "/" + date.split("-")[0];
     table.innerHTML += `
@@ -200,6 +200,7 @@ async function registerDebit() {
       description: document.getElementById("description").value,
       value: document.getElementById("value").value.replace(",", "."),
       date: document.getElementById("date").value,
+      dueDate: document.getElementById("due_date").value,
       category: document.getElementById("category").value,
       userId: localStorage.getItem("userId"),
     }),

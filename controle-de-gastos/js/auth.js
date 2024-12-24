@@ -1,85 +1,108 @@
-$(document).ready(function () {
-  const api = "http://localhost:8080";
-  // const api = 'http://192.168.15.90:8080'
-});
+const api = "http://localhost:8080";
+$(document).ready(function () {});
 
-const formLogin = document.getElementById("formLogin")
+const formLogin = document.getElementById("formLogin");
 
-formLogin.addEventListener('submit', e => {
+formLogin.addEventListener("submit", (e) => {
   e.preventDefault();
   login();
 });
 
-async function login() {
+function login() {
   const usuario = document.getElementById("username").value;
   const senha = document.getElementById("password").value;
-  const invalidMessage = document.getElementById("invalidMessage")
-
-  const response = await fetch(`${api}/auth/login`, {
+  $.ajax({
+    url: `${api}/auth/login`,
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
+    data: JSON.stringify({
       username: usuario,
       password: senha,
     }),
+    success: function (response) {
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("userId", response.userId);
+      window.location.href = "loading.html";
+    },
+    error: function () {
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      getLoginParams();
+      showToast(
+        "Usuário ou senha incorreta",
+        "Erro",
+        "toast-header text-bg-danger"
+      );
+    },
   });
-
-  if (response.ok) {
-    const data = await response.json();
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("userId", data.userId);
-    localStorage.setItem("img", data.img);
-    window.location.href = "loading.html";
-  } else {
-    document.getElementById("username").value = "";
-    document.getElementById("password").value = "";
-    getLoginParams();
-    showToast("Usuário ou senha incorreta", "Erro", "toast-header text-bg-danger");
-
-  }
 }
 
 function sair() {
   localStorage.clear();
-  window.location.href = "loading.html"
+  window.location.href = "loading.html";
 }
 
+function imgLoad() {
+  const token = localStorage.getItem("token");
+  const fileUp = document.getElementById("filein").files[0];
+  const formData = new FormData();
+  formData.append("file", fileUp);
+  formData.append("userId", localStorage.getItem("userId"));
+
+  $.ajax({
+    url: `${api}/auth/image`,
+    method: "POST",
+    headers: {
+      //"Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    processData: false,
+    contentType: false,
+    data: formData,
+    success: function () {
+      location.href = 'home.html'
+    },
+    error: function () {
+      // implementar erro
+    },
+  });
+}
+
+/*
 async function imgLoad() {
   const token = localStorage.getItem("token");
-  const fileUp = document.getElementById('filein').files[0];
+  const fileUp = document.getElementById("filein").files[0];
   const formData = new FormData();
-  formData.append('file', fileUp);
-  formData.append('userId', localStorage.getItem("userId"))
+  formData.append("file", fileUp);
+  formData.append("userId", localStorage.getItem("userId"));
 
   const response = await fetch(`${api}/auth/image`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    body: formData
+    body: formData,
   });
 
   if (response.ok) {
     window.location.href = "home.html";
   }
 }
+*/
 
 async function removeImg() {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
-  const response = await fetch(
-    `${api}/auth/image?userId=${userId}`,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${api}/auth/image?userId=${userId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
 
   if (response.ok) {
     location.href = "home.html";
@@ -90,8 +113,8 @@ function getLoginParams() {
   const params = new URLSearchParams(window.location.search);
   const log = params.get("log");
   if (log == "false") {
-    console.log('entrou aqui')
-    location.href = 'index.html'
+    console.log("entrou aqui");
+    location.href = "index.html";
   }
 }
 

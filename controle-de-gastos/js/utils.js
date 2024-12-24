@@ -6,6 +6,7 @@ function clearInput() {
   document.getElementById("newCategory").className = "d-none";
   document.getElementById("category").className = "form-control";
   document.getElementById("date").value = setDate();
+  document.getElementById("due_date").value = setDate();
   document.getElementById("category").value = "";
   document.getElementById("newCategory").value = "";
   document.getElementById("date").disabled = false;

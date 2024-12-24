@@ -57,7 +57,7 @@ public class AuthController {
         response.put("token", token);
         response.put("userId", user.getId().toString());
         response.put("img", user.getImage());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/image")

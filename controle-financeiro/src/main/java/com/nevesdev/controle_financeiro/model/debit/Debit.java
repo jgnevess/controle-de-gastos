@@ -31,6 +31,9 @@ public class Debit implements Serializable {
     @Column(name = "debit_date")
     private LocalDateTime date;
 
+    @Column(nullable = false, name = "due_date")
+    private LocalDateTime dueDate;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -49,6 +52,7 @@ public class Debit implements Serializable {
         this.updatedAt = LocalDateTime.now();
         this.value = in.getValue();
         this.user = user;
+        this.dueDate = in.getDueDate();
     }
 
 }

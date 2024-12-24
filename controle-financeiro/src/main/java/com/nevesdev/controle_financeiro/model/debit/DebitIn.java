@@ -18,6 +18,8 @@ public class DebitIn {
 
     private Double value;
 
+    private LocalDateTime dueDate;
+
     private LocalDateTime date;
 
     private String category;
@@ -30,5 +32,6 @@ public class DebitIn {
         this.date = debit.getDate();
         this.value = debit.getValue();
         this.description = debit.getDescription();
+        this.dueDate = debit.getDueDate();
     }
 }
