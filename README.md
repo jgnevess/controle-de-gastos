@@ -7,6 +7,9 @@
 <p>Possui um sistema de login, para que possa suportar mais de um usuário, e cada usuário tera acesso a apenas os próprios registros</p>
 <p>Fique a vontade para usar o software fazer ou sugerir melhorias e alterações.</p>
 
+### Video do projeto
+<a href="https://www.youtube.com/watch?v=QsL-hyMD2hs" target="_blank">Video</a>
+
 ## Backend
 
 <p>Backend desenvolvido em Java + Spring boot, utilizando também token JWT para autenticação</p>
