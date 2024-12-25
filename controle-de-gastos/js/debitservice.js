@@ -162,11 +162,11 @@ function setTables(data) {
       date.split("-")[2] + "/" + date.split("-")[1] + "/" + date.split("-")[0];
     table.innerHTML += `
       <tr>
-          <td class="truncate-cell pt-3">${element.description}</td>
-          <td class="d-none d-md-block p-md-3">${date}</td>
-          <td class="pt-3">R$ ${element.value.toFixed(2).replace(".", ",")}</td>
-          <td class="d-none d-md-block p-md-3">${element.category}</td>
-          <td>
+          <td class="truncate-cell pt-3 text-center">${element.description}</td>
+          <td class="d-none d-md-block p-md-3 text-center">${date}</td>
+          <td class="pt-3 text-center">R$ ${element.value.toFixed(2).replace(".", ",")}</td>
+          <td class="d-none d-md-block p-md-3 text-center">${element.category ? element.category : 'Sem categoria'}</td>
+          <td class="text-center">
               <button class="btn btn-primary me-1" 
                       onclick="findDebitId(${element.id})"
                       data-bs-toggle="modal"
@@ -208,7 +208,7 @@ async function registerDebit() {
 
   if (response.ok) {
     const data = await response.json();
-    location.href = "home.html";
+    location.href = "debits.html";
   }
 }
 
@@ -231,6 +231,7 @@ async function findDebitId(id) {
         .replace(".", ",")),
       (document.getElementById("date").disabled = true);
     document.getElementById("date").value = data.date;
+    document.getElementById("due_date").value = data.dueDate;
     document.getElementById("category").value = data.category;
     document.getElementById("register").className = "btn btn-primary d-none";
     document.getElementById("updater").className = "btn btn-primary";
@@ -261,7 +262,7 @@ async function deleteDebit() {
   );
 
   if (response.ok) {
-    location.href = "home.html";
+    location.href = "debits.html";
   }
 }
 
@@ -281,6 +282,7 @@ async function updateDebit() {
       body: JSON.stringify({
         description: document.getElementById("description").value,
         value: document.getElementById("value").value.replace(",", "."),
+        dueDate: document.getElementById("due_date").value,
         category: document.getElementById("category").value,
         userId: localStorage.getItem("userId"),
       }),
@@ -289,7 +291,7 @@ async function updateDebit() {
 
   if (response.ok) {
     const data = await response.json();
-    location.href = "home.html";
+    location.href = "debits.html";
   }
 }
 
@@ -387,8 +389,6 @@ async function deleteCategory() {
       "Content-Type": "application/json",
     },
   });
-
-  console.log(response);
 
   if (response.ok) {
     resetCategory();

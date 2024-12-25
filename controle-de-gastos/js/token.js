@@ -17,7 +17,7 @@ function validateToken() {
         localStorage.clear();
         window.location.href = "index.html?err=true";
       } else {
-        window.location.href = "home.html";
+        window.location.href = "debits.html";
       }
     },
     error: function (err) {
