@@ -151,6 +151,8 @@ public class DebitService {
         debit.setCategory(debitUpdate.category());
         debit.setDescription(debitUpdate.description());
         debit.setValue(debitUpdate.value());
+        debit.setDueDate(debitUpdate.dueDate());
+        debit.setUpdatedAt(LocalDateTime.now());
         debitRepository.save(debit);
         return new DebitOut(debit);
     }
