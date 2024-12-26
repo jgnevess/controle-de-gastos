@@ -154,7 +154,7 @@ function setTables(data) {
   table.innerHTML = "";
   let total = document.getElementById("total");
   total.innerHTML = "TOTAL: R$ ";
-  let debitsList = data.debitOuts;
+  let debitsList = data.outs;
   total.innerHTML += data.total.toFixed(2).replace(".", ",");
   debitsList.forEach((element) => {
     let date = element.dueDate.split("T")[0];

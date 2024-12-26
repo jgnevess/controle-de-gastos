@@ -49,24 +49,10 @@
 
     <main class="mt-5">
         <div class="container">
-            <div class="row justify-content-between">
+            <div class="row justify-content-center">
                 <div class="mb-3 col-12 col-md-3 col-lg-3 pt-4">
                     <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#newDebitModal"
-                        onclick="restartModal()">Nova despesa <i class="bi bi-plus"></i></button>
-                </div>
-                <div class="mb-3 col-12 col-md-3 col-lg-3">
-                    <label for="username">Data inicial</label>
-                    <input type="date" class="form-control" id="start">
-                </div>
-                <div class="mb-3 col-12 col-md-3 col-lg-3">
-                    <label for="username">Data final</label>
-                    <input type="date" class="form-control" id="end">
-                </div>
-                <div class="mb-3 col-12 col-md-2 col-lg-2 pt-4">
-                    <button class="btn btn-dark w-100" id="searchBtn" onclick="searchPeriod()">Buscar <i
-                            class="d-md-none d-lg-inline bi bi-search"></i></button>
-                    <button class="btn btn-danger w-100 d-none" id="cancelBtn" onclick="startApp()">Cancelar <i
-                            class="d-md-none d-lg-inline bi bi-x-lg"></i></button>
+                        onclick="restartModal()">Nova entrada <i class="bi bi-plus"></i></button>
                 </div>
             </div>
             <div class="table-responsive" id="scroll-container">
@@ -74,9 +60,8 @@
                     <thead>
                         <tr>
                             <th class="text-center" onclick="setSortBy(2)">Descrição</th>
-                            <th onclick="setSortBy(0)" class="d-none d-md-block text-center">Vencimento</th>
+                            <th onclick="setSortBy(0)" class="d-none d-md-block text-center">Data</th>
                             <th class="text-center" onclick="setSortBy(4)">Valor</th>
-                            <th class="d-none d-md-block text-center">Categoria</th>
                             <th class="text-center">Opções</th>
                         </tr>
                     </thead>
@@ -138,46 +123,13 @@
                         <input type="datetime-local" class="form-control" id="date" placeholder="Data">
                         <label for="date">Data</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="datetime-local" class="form-control" id="due_date" placeholder="Vencimento">
-                        <label for="date">Vencimento</label>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <button class="btn btn-success ps-3 pe-3" style="height: 75%;" id="btnNewCategory"
-                                onclick="newCategory()">
-                                <i class="bi bi-plus"></i>
-                            </button>
-                            <button class="d-none" style="height: 75%;" id="btnNewCategoryReg"
-                                onclick="registerCategory()">
-                                <i class="bi bi-check"></i>
-                            </button>
-                        </div>
-                        <div class="form-floating mb-3 w-100 me-2 ms-2">
-                            <select type="text" class="form-control" id="category" placeholder="Categoria"
-                                onchange="selectCategory()">
-                            </select>
-                            <label for="category" id="categoryLabel">Categoria</label>
-                            <input type="text" class="d-none" id="newCategory" placeholder="Data">
-                            <label for="newCategory" id="categoryLabel">Categoria</label>
-                        </div>
-                        <div>
-                            <button class="btn btn-danger ps-3 pe-3" style="height: 75%;" id="btnDeleteCategory"
-                                onclick="deleteCategory()">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                            <button class="d-none" style="height: 75%;" id="btnclearCategory" onclick="clearCategory()">
-                                <i class="bi bi-x"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button onclick="clearInput()" type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal">Cancelar</button>
-                    <button onclick="registerDebit()" type="button" class="btn btn-primary"
+                    <button onclick="registerIn()" type="button" class="btn btn-primary"
                         id="register">Cadastrar</button>
-                    <button onclick="updateDebit()" type="button" class="btn btn-primary d-none"
+                    <button onclick="updateEntry()" type="button" class="btn btn-primary d-none"
                         id="updater">Atualizar</button>
                 </div>
             </div>
@@ -201,7 +153,7 @@
                 <div class="modal-footer">
                     <button onclick="clearInput()" type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal">Não</button>
-                    <button onclick="deleteDebit()" type="button" class="btn btn-danger">Excluir</button>
+                    <button onclick="deleteEntry()" type="button" class="btn btn-danger">Excluir</button>
                 </div>
             </div>
         </div>
@@ -212,7 +164,7 @@
         crossorigin="anonymous"></script>
     <script src="js/auth.js"></script>
     <script src="js/utils.js"></script>
-    <script src="js/debitservice.js"></script>
+    <script src="js/inservice.js"></script>
 </body>
 
 </html>

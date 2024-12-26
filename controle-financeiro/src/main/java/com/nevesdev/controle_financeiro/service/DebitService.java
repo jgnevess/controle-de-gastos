@@ -32,23 +32,22 @@ public class DebitService {
     public ListByMonth findAllByUserId(UUID userId, String sortBy) {
         int currentMonth = LocalDate.now().getMonthValue();
         int currentYear = LocalDate.now().getYear();
-        LocalDate startDate = LocalDate.of(currentYear, currentMonth, 1);
+        int day = LocalDate.now().getDayOfMonth();
+        LocalDate startDate = LocalDate.of(currentYear, currentMonth, day);
         LocalDateTime start = startDate.atStartOfDay();
-        LocalDate endDate = startDate.withDayOfMonth(LocalDate.now().lengthOfMonth());
-        LocalDateTime end = endDate.atTime(LocalTime.MAX);
-        List<Debit> debits = debitRepository.findAllByUserIdAndMonth(userId, start, end);
+        List<Debit> debits = debitRepository.findAllByUserIdAndDueDate(userId, start);
         List<DebitOut> debitOuts = new ArrayList<>();
         switch (sortBy) {
             case "date-up":
                 debitOuts = debits.stream()
                         .map(DebitOut::new)
-                        .sorted((d1, d2) -> d1.getDate().compareTo(d2.getDate()))
+                        .sorted((d1, d2) -> d1.getDueDate().compareTo(d2.getDueDate()))
                         .collect(Collectors.toList());
                 break;
             case "date-down":
                 debitOuts = debits.stream()
                         .map(DebitOut::new)
-                        .sorted((d2, d1) -> d1.getDate().compareTo(d2.getDate()))
+                        .sorted((d2, d1) -> d1.getDueDate().compareTo(d2.getDueDate()))
                         .collect(Collectors.toList());
                 break;
             case "description-up":
@@ -101,13 +100,13 @@ public class DebitService {
             case "date-up":
                 debitOuts = debits.stream()
                         .map(DebitOut::new)
-                        .sorted((d1, d2) -> d1.getDate().compareTo(d2.getDate()))
+                        .sorted((d1, d2) -> d1.getDueDate().compareTo(d2.getDueDate()))
                         .collect(Collectors.toList());
                 break;
             case "date-down":
                 debitOuts = debits.stream()
                         .map(DebitOut::new)
-                        .sorted((d2, d1) -> d1.getDate().compareTo(d2.getDate()))
+                        .sorted((d2, d1) -> d1.getDueDate().compareTo(d2.getDueDate()))
                         .collect(Collectors.toList());
                 break;
             case "description-up":
@@ -171,6 +170,13 @@ public class DebitService {
         int currentMonth = LocalDate.now().getMonthValue();
         int currentYear = LocalDate.now().getYear();
         LocalDate startDate = LocalDate.of(currentYear, currentMonth, 1);
+        if(currentMonth == 12) {
+            currentMonth = 1;
+            currentYear++;
+        }
+        else {
+            currentMonth++;
+        }
         LocalDate endDate = LocalDate.of(currentYear, currentMonth, LocalDate.now().getDayOfMonth());
         DateObject<LocalDate> res = new DateObject<>();
         res.setStart(startDate);

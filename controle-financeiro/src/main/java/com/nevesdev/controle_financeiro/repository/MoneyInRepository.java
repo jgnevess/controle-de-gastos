@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface MoneyInRepository extends JpaRepository<MoneyIn, Long> {
 
-    @Query(value = "SELECT * FROM money_in WHERE user_id = :userId and debit_date between :start and :end", nativeQuery = true)
-    List<Debit> findAllByUserIdAndMonth(UUID userId, LocalDateTime start, LocalDateTime end);
+    @Query(value = "SELECT * FROM money_in WHERE user_id = :userId and entry_date between :start and :end", nativeQuery = true)
+    List<MoneyIn> findAllByUserIdAndMonth(UUID userId, LocalDateTime start, LocalDateTime end);
 
 }

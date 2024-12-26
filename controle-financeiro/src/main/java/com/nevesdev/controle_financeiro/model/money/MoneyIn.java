@@ -26,6 +26,9 @@ public class MoneyIn {
     @Positive
     private double value;
 
+    @Column(name = "entry_date")
+    private LocalDateTime date;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -33,4 +36,12 @@ public class MoneyIn {
     @ManyToOne
     private User user;
 
+    public MoneyIn(MoneyInIn in, User user) {
+        this.description = in.getDescription();
+        this.value = in.getValue();
+        this.date = in.getDate();
+        this.user = user;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 }

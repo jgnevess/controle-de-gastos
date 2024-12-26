@@ -10,13 +10,13 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ListByMonth {
+public class ListByMonth<T> {
 
-    private List<DebitOut> debitOuts;
+    private List<T> outs;
     private double total;
 
-    public ListByMonth(List<DebitOut> debit, double total) {
-        this.debitOuts = debit;
+    public ListByMonth(List<T> out, double total) {
+        this.outs = out;
         this.total = total;
     }
 }
