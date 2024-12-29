@@ -183,4 +183,15 @@ public class DebitService {
         res.setEnd(endDate);
         return res;
     }
+
+    public DateObject<LocalDate> startEndMonth() {
+        int currentMonth = LocalDate.now().getMonthValue();
+        int currentYear = LocalDate.now().getYear();
+        LocalDate startDate = LocalDate.of(currentYear, currentMonth, 1);
+        LocalDate endDate = LocalDate.of(currentYear, currentMonth, LocalDate.now().getDayOfMonth());
+        DateObject<LocalDate> res = new DateObject<>();
+        res.setStart(startDate);
+        res.setEnd(endDate);
+        return res;
+    }
 }

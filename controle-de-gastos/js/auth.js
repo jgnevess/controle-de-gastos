@@ -62,7 +62,7 @@ function imgLoad() {
     contentType: false,
     data: formData,
     success: function () {
-      location.href = 'debits.html'
+      location.href = 'home.html'
     },
     error: function () {
       // implementar erro
@@ -87,7 +87,7 @@ async function imgLoad() {
   });
 
   if (response.ok) {
-    window.location.href = "debits.html";
+    window.location.href = "home.html";
   }
 }
 */
@@ -105,7 +105,7 @@ async function removeImg() {
   });
 
   if (response.ok) {
-    location.href = "debits.html";
+    location.href = "home.html";
   }
 }
 

@@ -34,7 +34,7 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="home.html" class="nav-link active">Home</a>
@@ -65,104 +65,42 @@
                     <input type="date" class="form-control" id="end">
                 </div>
                 <div class="mb-3 col-12 col-md-2 col-lg-2 pt-4">
-                    <button class="btn btn-dark w-100" id="searchBtn" onclick="searchPeriod()">Buscar <i
+                    <button class="btn btn-dark w-100" id="searchBtn" onclick="getTotalMonth()">Buscar <i
                             class="d-md-none d-lg-inline bi bi-search"></i></button>
                     <button class="btn btn-danger w-100 d-none" id="cancelBtn" onclick="startApp()">Cancelar <i
                             class="d-md-none d-lg-inline bi bi-x-lg"></i></button>
                 </div>
             </div>
+            <div class="row justify-content-center mt-5 pt-5 pb-5">
+                <h2 class="text-center">Relatório do mês de <span id="month"></span></h2>
+                <div class="row col-md-8 d-flex justify-content-center">
+                    <div class="col-xs-12 col-sm-6 pt-4">
+                        <h4 class="mb-3">Quantidade ganha</h4>
+                        <h3><span class="me-3">R$</span><span id="ganho"></span></h3>
+                    </div>
+                </div>
+                <div class="row col-md-8 d-flex justify-content-center">
+                    <div class="col-xs-12 col-sm-6 pt-4">
+                        <h4 class="mb-3">Quantidade gasta</h4>
+                        <h3><span class="me-3">R$</span><span id="gasto"></span></h3>
+                    </div>
+                </div>
+                <div class="row col-md-8 d-flex justify-content-center">
+                    <div class="col-xs-12 col-sm-6 pt-4">
+                        <h4 class="mb-3">Quanto sobrou</h4>
+                        <h3><span class="me-3">R$</span><span id="sobra"></span></h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
-
-
-
-    <div class="modal fade" id="pictureModal" tabindex="-1" aria-labelledby="pictureModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="pictureModalLabel">Carregar nova imagem</h1>
-                    <button onclick="clearInput()" type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3 w-100">
-                        <label for="filein">Carregar imagem</label>
-                        <input type="file" class="form-control" id="filein" accept="image/*">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button onclick="clearInput()" type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">Cancelar</button>
-                    <button onclick="imgLoad()" type="button" class="btn btn-primary">Carregar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="newDebitModal" tabindex="-1" aria-labelledby="newDebitModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="newDebitModalLabel">Nova despesa</h1>
-                    <button onclick="clearInput()" type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="description" placeholder="Descrição">
-                        <label for="description">Descrição</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="value" placeholder="Valor">
-                        <label for="value">Valor</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="datetime-local" class="form-control" id="date" placeholder="Data">
-                        <label for="date">Data</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button onclick="clearInput()" type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">Cancelar</button>
-                    <button onclick="registerIn()" type="button" class="btn btn-primary"
-                        id="register">Cadastrar</button>
-                    <button onclick="updateEntry()" type="button" class="btn btn-primary d-none"
-                        id="updater">Atualizar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Deseja realmente excluir?</h1>
-                    <button onclick="clearInput()" type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h4>Descrição <span id="span-description"></span></h4>
-                    <h4>Valor: R$ <span id="span-value"></span></h4>
-                    <p class="border-top pt-3 text-danger">Os dados serão excluídos permanentemente</p>
-                    <p class="text-danger">Deseja mesmo excluir?</p>
-                </div>
-                <div class="modal-footer">
-                    <button onclick="clearInput()" type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">Não</button>
-                    <button onclick="deleteEntry()" type="button" class="btn btn-danger">Excluir</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="js/auth.js"></script>
     <script src="js/utils.js"></script>
-    <script src="js/inservice.js"></script>
+    <script src="js/homeservice.js"></script>
 </body>
 
 </html>

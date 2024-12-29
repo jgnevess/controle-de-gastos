@@ -65,4 +65,9 @@ public class DebitController {
     public ResponseEntity<DateObject<LocalDate>> getDate() {
         return ResponseEntity.ok(debitService.startEnd());
     }
+
+    @GetMapping(value = "month")
+    public ResponseEntity<DateObject<LocalDate>> getDateMonth() {
+        return ResponseEntity.ok(debitService.startEndMonth());
+    }
 }

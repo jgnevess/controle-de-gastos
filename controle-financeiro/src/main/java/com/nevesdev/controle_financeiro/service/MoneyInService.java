@@ -55,6 +55,21 @@ public class MoneyInService {
         return new ListByMonth(out, total);
     }
 
+    public ListByMonth findAllByUser(UUID userId, LocalDate startDate, LocalDate endDate) {
+        int currentMonth = LocalDate.now().getMonthValue();
+        int currentYear = LocalDate.now().getYear();
+        int day = 1;
+        LocalDateTime start = startDate.atStartOfDay();
+        LocalDateTime end = endDate.atTime(LocalTime.MAX);
+        List<MoneyIn> min = moneyInRepository.findAllByUserIdAndMonth(userId, start, end);
+        List<MoneyInOut> out = min.stream().map(MoneyInOut::new).toList();
+        double total = 0.0;
+        for(MoneyIn o : min) {
+            total += o.getValue();
+        }
+        return new ListByMonth(out, total);
+    }
+
     public MoneyInOut findById(Long id) {
         MoneyInOut moneyInOut = new MoneyInOut(moneyInRepository.findById(id).orElseThrow());
         return moneyInOut;

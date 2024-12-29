@@ -24,9 +24,6 @@ public class HomeController {
 
     @PostMapping
     public ResponseEntity<Map<String, Double>> findDiff(@RequestParam UUID userId, @RequestBody HomeIn in) {
-        Map<String, Double> res = new HashMap<>();
-        res.put("Valor", homeService.findDifference(userId, in.getStart(), in.getEnd()));
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(homeService.findDifferenceParam(userId, in.getStart(), in.getEnd()));
     }
-
 }

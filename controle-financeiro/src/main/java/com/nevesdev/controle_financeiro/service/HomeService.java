@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -17,12 +19,24 @@ public class HomeService {
     @Autowired
     private DebitService debitService;
 
-    public Double findDifference(UUID userId, LocalDate startDate, LocalDate endDate) {
+    public Map<String, Double> findDifference(UUID userId, LocalDate startDate, LocalDate endDate) {
         Double debitValue = debitService.findAllByUserIdByPeriod(userId, startDate, endDate, "date-up").getTotal();
         Double inValue = moneyInService.findAllByUser(userId).getTotal();
-        System.out.println(debitValue);
-        System.out.println(inValue);
-        return inValue - debitValue;
+        Map<String, Double> res = new HashMap<>();
+        res.put("Entrada", inValue);
+        res.put("Gasto", debitValue);
+        res.put("Total", inValue - debitValue);
+        return res;
+    }
+
+    public Map<String, Double> findDifferenceParam(UUID userId, LocalDate startDate, LocalDate endDate) {
+        Double debitValue = debitService.findAllByUserIdByPeriod(userId, startDate, endDate, "date-up").getTotal();
+        Double inValue = moneyInService.findAllByUser(userId, startDate, endDate).getTotal();
+        Map<String, Double> res = new HashMap<>();
+        res.put("Entrada", inValue);
+        res.put("Gasto", debitValue);
+        res.put("Total", inValue - debitValue);
+        return res;
     }
 
 }
