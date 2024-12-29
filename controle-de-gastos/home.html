@@ -37,10 +37,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="home.html" class="nav-link">Home</a>
+                        <a href="home.html" class="nav-link active">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="in.html" class="nav-link active">Entrada</a>
+                        <a href="in.html" class="nav-link">Entrada</a>
                     </li>
                     <li class="nav-item">
                         <a href="debits.html" class="nav-link">Débitos</a>
@@ -55,28 +55,20 @@
 
     <main class="mt-5">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="mb-3 col-12 col-md-3 col-lg-3 pt-4">
-                    <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#newDebitModal"
-                        onclick="restartModal()">Nova entrada <i class="bi bi-plus"></i></button>
+            <div class="row justify-content-between">
+                <div class="mb-3 col-12 col-md-3 col-lg-3">
+                    <label for="username">Data inicial</label>
+                    <input type="date" class="form-control" id="start">
                 </div>
-            </div>
-            <div class="table-responsive" id="scroll-container">
-                <table class="table table-striped" id="debit-tb">
-                    <thead>
-                        <tr>
-                            <th class="text-center" onclick="setSortBy(2)">Descrição</th>
-                            <th onclick="setSortBy(0)" class="d-none d-md-block text-center">Data</th>
-                            <th class="text-center" onclick="setSortBy(4)">Valor</th>
-                            <th class="text-center">Opções</th>
-                        </tr>
-                    </thead>
-                    <tbody id="debit-body">
-
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-end mt-3">
-                    <h2 id="total">Total: R$ </h2>
+                <div class="mb-3 col-12 col-md-3 col-lg-3">
+                    <label for="username">Data final</label>
+                    <input type="date" class="form-control" id="end">
+                </div>
+                <div class="mb-3 col-12 col-md-2 col-lg-2 pt-4">
+                    <button class="btn btn-dark w-100" id="searchBtn" onclick="searchPeriod()">Buscar <i
+                            class="d-md-none d-lg-inline bi bi-search"></i></button>
+                    <button class="btn btn-danger w-100 d-none" id="cancelBtn" onclick="startApp()">Cancelar <i
+                            class="d-md-none d-lg-inline bi bi-x-lg"></i></button>
                 </div>
             </div>
         </div>

@@ -14,38 +14,44 @@
 </head>
 
 <body>
-    <div class="header border p-3">
-        <div class="row">
-            <ul class="col-6 nav justify-content-between">
-                <li class="nav-item d-flex">
-                    <img id="userPic" alt="foto" data-bs-toggle="collapse" data-bs-target="#collapsePicture"
-                        aria-expanded="false" aria-controls="collapsePicture">
-                    <div class="ms-3">
-                        <div class="collapse collapse-horizontal" id="collapsePicture">
-                            <div class="d-flex" style="width: 400px;">
-                                <button class="btn btn-outline-dark" data-bs-toggle="modal"
-                                    data-bs-target="#pictureModal">Alterar imagem</button>
-                                <button class="btn btn-outline-dark ms-1" onclick="removeImg()">Remover imagem</button>
-                            </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="nav-item d-flex">
+                <img onclick="invisibleBtn()" width="30px" id="userPic" alt="foto" data-bs-toggle="collapse"
+                    data-bs-target="#collapsePicture" aria-expanded="false" aria-controls="collapsePicture">
+                <div class="ms-3">
+                    <div class="collapse collapse-horizontal" id="collapsePicture">
+                        <div class="d-flex" style="width: 400px;">
+                            <button class="btn btn-outline-dark" data-bs-toggle="modal"
+                                data-bs-target="#pictureModal">Alterar imagem</button>
+                            <button class="btn btn-outline-dark ms-1" onclick="removeImg()">Remover imagem</button>
                         </div>
                     </div>
-                </li>
-            </ul>
-            <ul class="nav col-4 justify-content-end">
-                <li class="nav-item">
-                    <a href="in.html" class="btn">Entrada</a>
-                </li>
-                <li class="nav-item">
-                    <a href="debits.html" class="btn active">Débitos</a>
-                </li>
-            </ul>
-            <ul class="nav col-2 justify-content-end">
-                <li class="nav-item">
-                    <button class="nav-link" onclick="sair()">Sair</button>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <button id="hamb-btn" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="home.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="in.html" class="nav-link">Entrada</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="debits.html" class="nav-link active">Débitos</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="sair()">Sair</button>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
 
     <main class="mt-5">
         <div class="container">

@@ -67,4 +67,18 @@ function getParams() {
   }
 }
 
+function invisibleBtn() {
+  const hambBtn = document.getElementById('hamb-btn');
+
+  if (hambBtn.className === 'navbar-toggler d-none') {
+    setTimeout(function() {
+      hambBtn.className = 'navbar-toggler';
+    }, 500);
+  } else {
+    setTimeout(function() {
+      hambBtn.className = 'navbar-toggler d-none';
+    }, 100);
+  }
+}
+
 window.onload = getParams();
